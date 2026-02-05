@@ -1,2 +1,3 @@
 venv1/
 _pycache_/
+.env
