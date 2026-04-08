@@ -1,5 +1,7 @@
 import requests
 import json
+from datetime import date
+
 
 import os
 from dotenv import load_dotenv
@@ -110,7 +112,13 @@ def get_video_stats(video_ids):
         print(f"Error fetching video stats: {e}")
         raise
     
-#print(get_video_stats(video_ids))
+def save_to_json(video_stats):
+    file_path=f"./data/YT_data_{date.today()}.json"
+
+    with open(file_path, 'w', encoding="utf-8") as json_outfile:
+        json.dump(video_stats, json_outfile, indent=2)
+
+
         
 
 
@@ -118,6 +126,7 @@ if __name__== "__main__":
     playlist_id=get_channel_playlistid()
     video_ids=get_video_id(playlist_id)
     video_stats=get_video_stats(video_ids)
+    save_to_json(video_stats)
 
 
 
